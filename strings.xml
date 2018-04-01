@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ProjetTest</string>
+    <string name="agence">Agence</string>
+    <string name="louer">Louer</string>
+    <string name="vendre">Vendre</string>
+    <string name="acheter">Acheter</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
