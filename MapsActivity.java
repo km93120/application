@@ -44,21 +44,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
     }
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-       /* SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);    */                                                      //provoque une erreur
 
 
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
-       // try {
-            SQLiteOpenHelper agenceDatabaseHelper = new AgenceDatabaseHelper(this);
-            SQLiteDatabase db = agenceDatabaseHelper.getReadableDatabase();
-            Cursor cursor = db.query("Agence",
+        GMap = googleMap;
+       try {
+            SQLiteOpenHelper agenceDatabaseHelper = new AgenceDatabaseHelper(this);     //instanciation de l'assistant de gestion de base de donnees
+            SQLiteDatabase db = agenceDatabaseHelper.getReadableDatabase(); // creation d'un base de donnee et ajout des donnees a l'interieur
+            Cursor cursor = db.query("AGENCE",              //on recupere tout le contenu dans la table
                     new String[]{"NOM", "LATITUDE","LONGITUDE"},
                     null,
                     null,
@@ -66,84 +62,70 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     null,
                     null,
                     null);
-            double userLatitude = 48.814486;
+            double userLatitude = 48.814486;                //pour l'instant on fait nos tests avec des coordonees fixes
             double userLongitude = 2.394652;
 
-            Marker [] addedMarkers = new Marker[cursor.getCount()];
+           
 
-            LatLng agences [] = new LatLng[cursor.getCount()];
-            String nomAgences [] = new String [cursor.getCount()];
+            LatLng coordAgences [] = new LatLng[cursor.getCount()];              // tableau qui stocke les coordonnees des agences
+            String nomAgences [] = new String [cursor.getCount()];          //tableau qui stocke le nom des agences
             int i = 0;
             do {
 
 
-                agences[i] = new LatLng(cursor.getDouble(1),cursor.getDouble(2));
+                coordAgences[i] = new LatLng(cursor.getDouble(1),cursor.getDouble(2));       // remplissage des tableaux
                 nomAgences[i] = cursor.getString(0);
                 i++;
 
 
-            }while(cursor.moveToNext());
+            }while(cursor.moveToNext());                                                    //tant qu'on a pas atteint le dernier enregistrement du curseur.
 
 
 
 
 
 
-        GMap = googleMap;
-
+        
+        Marker [] addedMarkers = new Marker[cursor.getCount()];         // creation d'un tableau de Marker
         //on s'assure que l'objet map n'est pas vide
         if (GMap != null) {
-            //mode d'affichage de la carte
+
             GMap.setTrafficEnabled(true);
 
-            //on autorise l'api à afficher le bouton pour accéder à notre position courante
-            /*if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }*/
-            //GMap.setMyLocationEnabled(true);
 
-            //définition du marqueur qui va se positionner sur le point qu'on désire afficher
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.title("My position");
-            markerOptions.visible(true);
-            MarkerOptions [] markerOptions1 = new MarkerOptions[cursor.getCount()];
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-            for(int j =0; j< agences.length;j++)
+            MarkerOptions [] markerOptions1 = new MarkerOptions[cursor.getCount()];     // creation d'un tableau contenant les objets qui contiennent les options a appliquer au marqueurs
+            for(int j =0; j< coordAgences.length;j++)
             {
                 markerOptions1[j] = new MarkerOptions();
                 //markerOptions1[j].icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-                if(distance(userLatitude,userLongitude,agences[j].latitude,agences[j].longitude) < 895555)
+                if(distance(userLatitude,userLongitude,coordAgences[j].latitude,coordAgences[j].longitude) < 895555)
                 {
-                    addedMarkers[j] = googleMap.addMarker(markerOptions1[j].position(agences[j]).title(nomAgences[j]).visible(true));
+                    addedMarkers[j] = GMap.addMarker(markerOptions1[j].position(coordAgences[j]).title(nomAgences[j]).visible(true));
 
                 }
                 else
                 {
-                    addedMarkers[j] = googleMap.addMarker(new MarkerOptions ().position(agences[j]).title(nomAgences[j]).visible(false));
+                    addedMarkers[j] = GMap.addMarker(new MarkerOptions ().position(coordAgences[j]).title(nomAgences[j]).visible(false));
                 }
             }
             //ajout du marqueur sur la carte
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.title("My position");
+            markerOptions.visible(true);
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
             marker = GMap.addMarker(markerOptions.position(myposition).title("My position").visible(true));
             marker.setTag(0);
             //zoom de la caméra sur la position qu'on désire afficher
-            GMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Centre,7));
+            GMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Centre,52));
             //animation le zoom toute les 2000ms
             GMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-
+            cursor.close();
         }
-      /*  }catch (SQLiteException e)
+        }catch (SQLiteException e)
             {
                 Toast toast = Toast.makeText(this,"Base de donnees non disponible",Toast.LENGTH_SHORT);
                 toast.show();
-            }*/
+            }
         }
     }
-
 
