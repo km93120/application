@@ -19,6 +19,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+import static java.lang.System.out;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,Calcul {
 
     private GoogleMap GMap;
@@ -51,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         GMap = googleMap;
-       try {
+       // try {
             SQLiteOpenHelper agenceDatabaseHelper = new AgenceDatabaseHelper(this);     //instanciation de l'assistant de gestion de base de donnees
             SQLiteDatabase db = agenceDatabaseHelper.getReadableDatabase(); // creation d'un base de donnee et ajout des donnees a l'interieur
             Cursor cursor = db.query("AGENCE",              //on recupere tout le contenu dans la table
@@ -60,32 +62,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     null,
                     null,
                     null,
-                    null,
-                    null);
+                    null
+                    );
             double userLatitude = 48.814486;                //pour l'instant on fait nos tests avec des coordonees fixes
             double userLongitude = 2.394652;
 
-           
+            out.print(cursor.getCount());
 
             LatLng coordAgences [] = new LatLng[cursor.getCount()];              // tableau qui stocke les coordonnees des agences
             String nomAgences [] = new String [cursor.getCount()];          //tableau qui stocke le nom des agences
             int i = 0;
-            do {
+            cursor.moveToFirst();
+
+        while (!cursor.isAfterLast() )
+        {
+            coordAgences[i] = new LatLng(cursor.getDouble(1),cursor.getDouble(2));       // remplissage des tableaux
+            nomAgences[i] = cursor.getString(0);
+            i++;
+            cursor.moveToNext();
+        }
+                                                              //tant qu'on a pas atteint le dernier enregistrement du curseur.
 
 
-                coordAgences[i] = new LatLng(cursor.getDouble(1),cursor.getDouble(2));       // remplissage des tableaux
-                nomAgences[i] = cursor.getString(0);
-                i++;
-
-
-            }while(cursor.moveToNext());                                                    //tant qu'on a pas atteint le dernier enregistrement du curseur.
 
 
 
 
 
-
-        
         Marker [] addedMarkers = new Marker[cursor.getCount()];         // creation d'un tableau de Marker
         //on s'assure que l'objet map n'est pas vide
         if (GMap != null) {
@@ -97,8 +100,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             for(int j =0; j< coordAgences.length;j++)
             {
                 markerOptions1[j] = new MarkerOptions();
-                //markerOptions1[j].icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-                if(distance(userLatitude,userLongitude,coordAgences[j].latitude,coordAgences[j].longitude) < 895555)
+               // markerOptions1[j].icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                if(distance(userLatitude,userLongitude,coordAgences[j].latitude,coordAgences[j].longitude) < 10)
                 {
                     addedMarkers[j] = GMap.addMarker(markerOptions1[j].position(coordAgences[j]).title(nomAgences[j]).visible(true));
 
@@ -121,11 +124,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             GMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
             cursor.close();
         }
-        }catch (SQLiteException e)
+      /*  }catch (SQLiteException e)
             {
                 Toast toast = Toast.makeText(this,"Base de donnees non disponible",Toast.LENGTH_SHORT);
                 toast.show();
-            }
+            }*/
         }
     }
 
