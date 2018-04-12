@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,6 +19,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import static java.lang.System.out;
 
@@ -66,8 +68,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     );
             double userLatitude = 48.814486;                //pour l'instant on fait nos tests avec des coordonees fixes
             double userLongitude = 2.394652;
+        String s = "" + cursor.getCount();
+        Log.v("debug",s);
 
-            out.print(cursor.getCount());
 
             LatLng coordAgences [] = new LatLng[cursor.getCount()];              // tableau qui stocke les coordonnees des agences
             String nomAgences [] = new String [cursor.getCount()];          //tableau qui stocke le nom des agences
@@ -101,14 +104,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 markerOptions1[j] = new MarkerOptions();
                // markerOptions1[j].icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-                if(distance(userLatitude,userLongitude,coordAgences[j].latitude,coordAgences[j].longitude) < 10)
+                if(distance(userLatitude,userLongitude,coordAgences[j].latitude,coordAgences[j].longitude) < 888888)
                 {
                     addedMarkers[j] = GMap.addMarker(markerOptions1[j].position(coordAgences[j]).title(nomAgences[j]).visible(true));
 
                 }
                 else
                 {
-                    addedMarkers[j] = GMap.addMarker(new MarkerOptions ().position(coordAgences[j]).title(nomAgences[j]).visible(false));
+                    addedMarkers[j] = GMap.addMarker(markerOptions1[j].position(coordAgences[j]).title(nomAgences[j]).visible(true));
                 }
             }
             //ajout du marqueur sur la carte
