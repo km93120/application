@@ -104,7 +104,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 markerOptions1[j] = new MarkerOptions();
                // markerOptions1[j].icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-                if(distance(userLatitude,userLongitude,coordAgences[j].latitude,coordAgences[j].longitude) < 888888)
+                if(distance(userLatitude,userLongitude,coordAgences[j].latitude,coordAgences[j].longitude) <0.05)
                 {
                     addedMarkers[j] = GMap.addMarker(markerOptions1[j].position(coordAgences[j]).title(nomAgences[j]).visible(true));
 
