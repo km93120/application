@@ -11,7 +11,7 @@ import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-
+import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,6 +42,9 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonReponse = new JSONObject(response);          // comme on a encodé la reponse en json on cree un onject de type JSOn
                             boolean success = jsonReponse.getBoolean("success");
+                            String usr = jsonReponse.getString("username");
+                            Log.d("d",usr);
+
 
                             if(success)
                             {
@@ -69,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
 
-                RegisterRequest registerRequest = new RegisterRequest(mail,usrname,passwd,responseListener);    // le passage d'arguments se fait ici
+                RegisterRequest registerRequest = new RegisterRequest(usrname,passwd,responseListener);    // le passage d'arguments se fait ici
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);         // on execute la requete d'acces a la base de donnees.
 

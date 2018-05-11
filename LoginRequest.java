@@ -6,7 +6,7 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginRequest extends StringRequest {
+public class LoginRequest extends StringRequest { // hérite de stringRequest , classe de la bibliotheque Volley, necessaire a l'utilsiation de l'architecture REST
 
     private static final String LOGIN_REQUEST_URL = "http://madadiatman.000webhostapp.com/login.php"; // l'url qui mène au fichier  PHP distant
     private Map<String,String> parametres;

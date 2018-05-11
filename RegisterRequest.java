@@ -11,11 +11,11 @@ public class RegisterRequest extends StringRequest      //extends StringRequest 
     private static final String REGISTER_REQUEST_URL = "http://madadiatman.000webhostapp.com/register.php"; // l'url qui mène au fichier  PHP distant
     private Map<String,String> parametres;
 
-    public RegisterRequest(String email, String username, String password, Response.Listener<String> listener)
+    public RegisterRequest(String username, String password, Response.Listener<String> listener)
     {
         super(Method.POST,REGISTER_REQUEST_URL,listener,null);      // on utilise un conteneur de type clé - valeur pour stocker les informations renseignées dans formulaire
         parametres = new HashMap<>();
-        parametres.put("email",email);
+
         parametres.put("username",username);
         parametres.put("password",password);
 
