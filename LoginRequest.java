@@ -1,12 +1,13 @@
-package com.example.khafi.myapplications;
+package com.example.alexa.projettest;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginRequest extends StringRequest { // hérite de stringRequest , classe de la bibliotheque Volley, necessaire a l'utilsiation de l'architecture REST
+public class LoginRequest extends StringRequest {
 
     private static final String LOGIN_REQUEST_URL = "http://madadiatman.000webhostapp.com/login.php"; // l'url qui mène au fichier  PHP distant
     private Map<String,String> parametres;

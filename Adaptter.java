@@ -1,4 +1,4 @@
-package com.example.khafi.myapplications;
+package com.example.alexa.projettest;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -32,8 +32,11 @@ public class Adaptter extends ArrayAdapter<String> {
         this.apercus = aprc;
         this.context = context;
     }
-
-
+    @Override
+    public int getCount()
+    {
+        return adresses.length;
+    }
 
     public View getView(int position , View convertView, ViewGroup parent)
     {

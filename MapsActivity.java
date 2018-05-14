@@ -1,4 +1,4 @@
-package com.example.khafi.myapplications;
+package com.example.alexa.projettest;
 
 
 import android.database.Cursor;
