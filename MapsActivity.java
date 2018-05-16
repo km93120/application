@@ -126,6 +126,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             GMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Centre,52));
             //animation le zoom toute les 2000ms
             GMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+
             cursor.close();
         }
       /*  }catch (SQLiteException e)

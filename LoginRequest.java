@@ -21,7 +21,8 @@ public class LoginRequest extends StringRequest { // hérite de stringRequest , 
 
     }
 
-    public Map<String, String> getParametres() {
+    public Map<String, String> getParametres()
+    {
         return parametres;
     }
 }

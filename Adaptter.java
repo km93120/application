@@ -1,6 +1,5 @@
 package com.example.khafi.myapplications;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -10,11 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
 
-/**
- * Created by sofian on 18/04/2018.
- */
 
 public class Adaptter extends ArrayAdapter<String> {
 
@@ -32,8 +27,11 @@ public class Adaptter extends ArrayAdapter<String> {
         this.apercus = aprc;
         this.context = context;
     }
-
-
+    @Override
+    public int getCount()
+    {
+        return adresses.length;
+    }
 
     public View getView(int position , View convertView, ViewGroup parent)
     {
@@ -41,15 +39,16 @@ public class Adaptter extends ArrayAdapter<String> {
 
         if(convertView == null)
         {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.listview_item,parent,false);
-            viewHolder.aprc = (ImageView) convertView.findViewById(R.id.imageView);
-            viewHolder.adr = (TextView) convertView.findViewById(R.id.textView1);
-            viewHolder.loy = (TextView) convertView.findViewById(R.id.textView2);
+            viewHolder.aprc = convertView.findViewById(R.id.imageView);
+            viewHolder.adr  = convertView.findViewById(R.id.textView1);
+            viewHolder.loy  = convertView.findViewById(R.id.textView2);
         }
         else
         {
             viewHolder = (ViewHolder) convertView.getTag();
+
         }
 
 

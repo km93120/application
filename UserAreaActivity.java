@@ -10,8 +10,8 @@ public class UserAreaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
 
-       EditText username = (EditText) findViewById(R.id.username);
-       EditText password = (EditText) findViewById(R.id.password);
+       EditText username = findViewById(R.id.username);
+       EditText password = findViewById(R.id.password);
 
     }
 

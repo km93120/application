@@ -22,7 +22,7 @@ public class AchatLocationDatabaseHelper extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE LOCATION (_id_location INTEGER PRIMARY KEY AUTOINCREMENT,"
+        db.execSQL("CREATE TABLE LOCATION ("
                 + "LOYER INTEGER,"
                 + "ADRESSE TEXT,"
                 + "APERCU BLOB);");
@@ -31,12 +31,11 @@ public class AchatLocationDatabaseHelper extends SQLiteOpenHelper {
                 + "ADRESSE TEXT,"
                 + "APERCU BLOB);");
 
-        insertLocation(db, 500, "4 Road",R.drawable.image1);
-        insertLocation(db, 500, "Road",R.drawable.image2);
+        insertLocation(db, 2005, "4 Road",R.drawable.image1);
+        insertLocation(db, 5869, "Road",R.drawable.image2);
         insertLocation(db, 500, "4 Road",R.drawable.image3);
         insertLocation(db, 500, "Road",R.drawable.image4);
         insertLocation(db, 500, "Road",R.drawable.imagep);
-
 
 
 
