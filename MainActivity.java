@@ -17,12 +17,12 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-    Button Agence;
-    Button Louer;
-    public Button Vendre;
-    public Button Acheter;
-    Button LoginCompte;
-    Button CreationCompte;
+    Button btnAgence;
+    Button btnLouer;
+    public Button btnVendre;
+    public Button btnAcheter;
+    Button btnLoginCompte;
+    Button btnCreationCompte;
 
 
     @Override
@@ -31,8 +31,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
 
-        Agence = findViewById(R.id.button);
-        Agence.setOnClickListener(new View.OnClickListener(){
+        btnAgence = findViewById(R.id.button);
+        btnAgence.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view)
             {
@@ -50,8 +50,8 @@ public class MainActivity extends Activity {
         });
 
 
-        Louer = findViewById(R.id.button2);
-        Louer.setOnClickListener(new View.OnClickListener(){
+        btnLouer = findViewById(R.id.button2);
+        btnLouer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view)
             {
@@ -69,8 +69,30 @@ public class MainActivity extends Activity {
 
 
         });
-        LoginCompte = findViewById(R.id.button5);
-       LoginCompte.setOnClickListener(new View.OnClickListener(){
+
+
+
+
+        btnVendre = findViewById(R.id.button3);
+        btnVendre.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(
+                        MainActivity.this,
+                        SaleActivity.class
+                );
+
+
+
+                startActivity(intent);
+
+            }
+
+        });
+
+        btnLoginCompte = findViewById(R.id.button5);
+        btnLoginCompte.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view)
             {
@@ -89,8 +111,8 @@ public class MainActivity extends Activity {
         });
 
 
-        CreationCompte = findViewById(R.id.button6);
-        CreationCompte.setOnClickListener(new View.OnClickListener(){
+        btnCreationCompte = findViewById(R.id.button6);
+        btnCreationCompte.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view)
             {
@@ -107,5 +129,8 @@ public class MainActivity extends Activity {
 
 
         });
+
+
+
     }
 }

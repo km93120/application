@@ -35,7 +35,7 @@ public class LocationActivity extends AppCompatActivity {
 
         int [] loyers = new int[cursor.getCount()];
         int [] apercus = new int[cursor.getCount()];
-         String [] adresses = new String[cursor.getCount()];
+        String [] adresses = new String[cursor.getCount()];
         cursor.moveToFirst();
         Log.d("cursor_count","" + cursor.getCount()); // probleme a ce niveau
 
