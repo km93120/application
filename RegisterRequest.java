@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class RegisterRequest extends StringRequest      //extends StringRequest pour pouvoir utiliser les méthodes liées a Volley
 {
-    private static final String REGISTER_REQUEST_URL = "http://madadiatman.000webhostapp.com/register.php"; // l'url qui mène au fichier  PHP distant
+    private static final String REGISTER_REQUEST_URL = "https://madadiatman.000webhostapp.com/register.php"; // l'url qui mène au fichier  PHP distant
     private Map<String,String> parametres;
 
     public RegisterRequest(String username, String password, Response.Listener<String> listener)

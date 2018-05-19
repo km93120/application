@@ -118,7 +118,7 @@ public class MainActivity extends Activity {
             {
                 Intent intent = new Intent(
                         MainActivity.this,
-                        RegisterActivity.class
+                        aRegisterActivity.class
                 );
 
 
